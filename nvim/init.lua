@@ -1,4 +1,5 @@
 require("chax0r.plugins")
 require("chax0r.remap")
 require("chax0r.lsp-config")
+require("chax0r.set")
 print("Hello chax0r")

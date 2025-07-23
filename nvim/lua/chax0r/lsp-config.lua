@@ -1,10 +1,12 @@
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('phpactor')
+vim.lsp.enable('gopls')
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
 		if not client then
 			return
-		end	
+		end
 		if client:supports_method('textDocument/completion') then
 			vim.opt.completeopt = {'menu', 'menuone', 'noinsert', 'fuzzy', 'popup'}
 			vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
@@ -15,9 +17,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 				-- Navigate completion menu
 			vim.keymap.set('i', '<C-n>', '<C-n>', { buffer = ev.buf, noremap = true })
 			vim.keymap.set('i', '<C-p>', '<C-p>', { buffer = ev.buf, noremap = true })
-			
+
 			-- Accept completion with Enter or Tab
-			vim.keymap.set('i', '<CR>', '<C-y>', { buffer = ev.buf, noremap = true })
 			vim.keymap.set('i', '<Tab>', '<C-y>', { buffer = ev.buf, noremap = true })
 		end
 			-- Add some useful LSP keymaps
