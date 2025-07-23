@@ -1,4 +1,4 @@
-vim.lsp.enable('emmylua')
+vim.lsp.enable('ls_lua')
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -13,6 +13,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.diagnostic.config({
---virtual_lines = {}
 virtual_lines = true
 })
