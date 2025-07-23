@@ -1,0 +1,41 @@
+--vim.cmd [[
+ -- augroup packer_user_config
+  --  autocmd!
+   -- autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  --augroup end
+--]]-
+
+--local cmp = require('cmp')
+--local cmp_select = {behavior = cmp.SelectBehavior.Select}
+--local cmp_mappings = lsp.default
+
+
+local lspconfig = require('lspconfig')
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
+--local cmp = require('cmp')
+--local cmp_select = {behavior = cmp.SelectBehavior.Select}
+--local cmp_mappings = lspconfig.defaults.cmp_mappings({
+--	['<C-p>'] = cmp.mappings.select_prev_item(cmp_select),
+--	['<C-n>'] = cmp.mappings.select_next_item(cmp_select),
+--	['<C-y>'] = cmp.mappings.confirm(cmp_select),
+--	['<C-Space>'] = cmp,mapping.complete()
+--})
+-- Enable autocompletion capabilities
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
+-- Common on_attach function for keymaps and setup
+local on_attach = function(client, bufnr)
+  local opts = { buffer = bufnr, noremap = true, silent = true }
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)  -- Go to definition
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)  -- Hover info
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)  -- Rename symbol
+  -- Add more keymaps as needed
+end
+
+-- Setup servers
+lspconfig.gopls.setup { on_attach = on_attach, capabilities = capabilities }  -- Go
+lspconfig.intelephense.setup { on_attach = on_attach, capabilities = capabilities }  -- PHP
+--lspconfig.phpactor.setup { on_attach = on_attach, capabilities = capabilities }  -- PHP
+lspconfig.ts_ls.setup { on_attach = on_attach, capabilities = capabilities }  -- JS/TS
+lspconfig.lua_ls.setup { on_attach = on_attach, capabilities = capabilities }  -- JS/TS
+lspconfig.pyright.setup { on_attach = on_attach, capabilities = capabilities }  -- Python

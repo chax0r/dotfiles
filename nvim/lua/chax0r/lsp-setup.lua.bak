@@ -1,0 +1,22 @@
+-- Get the lspconfig module
+--local lspconfig = require('lspconfig')
+
+-- Get the list of servers installed by mason-lspconfig
+--local servers = require('mason-lspconfig').get_installed_servers()
+
+-- Loop through the servers and set them up with lspconfig
+--for _, server_name in ipairs(servers) do
+  --lspconfig[server_name].setup{}
+--end
+require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = { 'gopls', 'ts_ls', 'lua_ls', 'pyright', 'phpactor' }  -- Servers for Go, PHP, JS/TS, Python
+})
+
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]]
+
