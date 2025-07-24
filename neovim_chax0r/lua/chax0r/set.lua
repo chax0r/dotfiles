@@ -26,6 +26,12 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 vim.g.mapleader = " "
 
+-- Debug: Global code action keybinding as fallback
+vim.keymap.set('n', '<leader>ca', function()
+    print("Global code action called!")
+    vim.lsp.buf.code_action()
+end, { desc = "Code Actions" })
+
 -- Additional productivity settings
 vim.opt.ignorecase = true      -- Case insensitive searching
 vim.opt.smartcase = true       -- Case sensitive if uppercase is used

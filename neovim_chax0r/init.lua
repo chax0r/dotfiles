@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
-require("lazy").setup("plugins")
 require("chax0r.set")
+require("lazy").setup("plugins")
 require("chax0r.lsp-config")
-
